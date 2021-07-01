@@ -1,0 +1,22 @@
+#!/usr/bin/env php
+<?php
+
+
+use EasySwoole\EasySwoole\Command\CommandRunner;
+
+//defined('EASYSWOOLE_ROOT') or define('EASYSWOOLE_ROOT', IN_PHAR ? \Phar::running() : realpath(getcwd()));
+
+
+define('EASYSWOOLE_ROOT',realpath(getcwd()));
+
+$file = EASYSWOOLE_ROOT . 'vendor/autoload.php';
+if (file_exists($file)) {
+    require $file;
+} else {
+    die("include composer autoload.php fail\n");
+}
+
+array_shift($argv);
+var_dump($argv);
+CommandRunner::getInstance()->run($argv);
+
